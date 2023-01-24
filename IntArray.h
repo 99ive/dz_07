@@ -1,20 +1,17 @@
 #pragma once
 #include <iostream>
+#include <exception>
 
-class LengthException
+class bad_length : public exception
 {
+public:
+	virtual const char* what() const noexcept;
 };
 
-class IndexException
+class bad_range : public exception
 {
-};
-
-class Oversize
-{
-};
-
-class BiggerOrEqual
-{
+public:
+	virtual const char* what() const noexcept;
 };
 
 class IntArray
@@ -49,5 +46,7 @@ public:
 	void insertAtBegonning(int value);
 
 	void insertAtEnd(int valur);
+	
+	int search(int value);
 };
 
