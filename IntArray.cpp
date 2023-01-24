@@ -1,11 +1,21 @@
 #include <iostream>
 #include "IntArray.h"
+#include <exception>
 
+const char* bad_length::what() const noexcept 
+{
+	return "Wrong length!";
+}
+
+const char* bad_range::what() const noexcept
+{
+	return "Out of range!";
+}
 
 IntArray::IntArray(int length) : m_length(length)
 {
 	if (length < 0) {
-		throw LengthException();
+		throw bad_length();
 	}
 	if (length > 0) {
 		m_data = new int[length];
@@ -71,10 +81,10 @@ void IntArray::erase()
 int& IntArray::operator[](int index)
 {
 	if (index < 0) {
-		throw IndexException();
+		throw bad_range();
 	}
 	if (index > m_length) {
-		throw Oversize();
+		throw bad_length();
 	}
 	return m_data[index];
 }
@@ -94,10 +104,10 @@ IntArray& IntArray::operator=(const IntArray& obj)
 void IntArray::insertBefore(int value, int index)
 {
 	if (index < 0) {
-		throw IndexException();
+		throw bad_range();
 	}
 	if (index > m_length) {
-		throw Oversize();
+		throw bad_length();
 	}
 	int* data = new int[m_length + 1];
 	for (int before{ 0 }; before, index; before++)
@@ -117,10 +127,10 @@ void IntArray::insertBefore(int value, int index)
 void IntArray::remove(int index)
 {
 	if (index < 0) {
-		throw IndexException();
+		throw bad_range();
 	}
 	if (index >= m_length) {
-		throw BiggerOrEqual();
+		throw bad_length();
 	}
 	if (m_length == 1) {
 		erase();
@@ -148,6 +158,16 @@ void IntArray::insertAtBegonning(int value)
 void IntArray::insertAtEnd(int value) 
 {
 	insertBefore(value, m_length);
+}
+
+int IntArray::search(int value)
+{	
+	for (int i{ 0 }; i < m_length; i++)
+	{
+		if (m_data[i] == value) {
+			return i;
+		}
+	}
 }
 
 
