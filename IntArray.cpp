@@ -2,6 +2,8 @@
 #include "IntArray.h"
 #include <exception>
 
+using namespace std;
+
 const char* bad_length::what() const noexcept 
 {
 	return "Wrong length!";
