@@ -2,6 +2,8 @@
 #include <iostream>
 #include <exception>
 
+using namespace std;
+
 class bad_length : public exception
 {
 public:
