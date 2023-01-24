@@ -10,8 +10,7 @@ int main()
 	setlocale(LC_ALL, "");
 
 	try 
-	{	//Ќиже представлен перечень тестовых значений
-
+	{
 		//IntArray arr(-7);
 		//IntArray brr(7);
 		//brr[-7];
@@ -23,22 +22,14 @@ int main()
 
 
 
-	}
-	catch (LengthException& lengthException)
-	{	
-		cout << "Length cannot be less than 0!" << endl;
-	}
-	catch (IndexException& indexException)
-	{	
-		cout << "Index cannot be less than 0!" << endl;
-	}
-	catch (Oversize& oversize)
+	catch (const bad_length& exc)
 	{
-		cout << "Index cannot be bigger than length of array!" << endl;
+		cout << exc.what() << endl;
 	}
-	catch (BiggerOrEqual& biggerOrEqual)
+
+	catch (const bad_range& exc)
 	{
-		cout << "Index cannot be bigger or equal to length of array!" << endl;
+		cout << exc.what() << endl;
 	}
 
 	return 0;
